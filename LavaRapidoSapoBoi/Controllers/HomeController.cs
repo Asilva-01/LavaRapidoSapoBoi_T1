@@ -17,7 +17,7 @@ namespace LavaRapidoSapoBoi.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Sua Estética Automotiva esta aqui!";
 
             return View();
         }

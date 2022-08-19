@@ -34,3 +34,4 @@ F:\Impacta\Udemy\C#\LavaRapidoSapoBoi\LavaRapidoSapoBoi\obj\Debug\netcoreapp2.1\
 F:\Impacta\Udemy\C#\LavaRapidoSapoBoi\LavaRapidoSapoBoi\obj\Debug\netcoreapp2.1\LavaRapidoSapoBoi.pdb
 F:\Impacta\Udemy\C#\LavaRapidoSapoBoi\LavaRapidoSapoBoi\obj\Debug\netcoreapp2.1\LavaRapidoSapoBoi.genruntimeconfig.cache
 F:\Impacta\Udemy\C#\LavaRapidoSapoBoi\LavaRapidoSapoBoi\obj\Debug\netcoreapp2.1\LavaRapidoSapoBoi.csproj.CopyComplete
+F:\Impacta\Udemy\C#\LavaRapidoSapoBoi\LavaRapidoSapoBoi\obj\Debug\netcoreapp2.1\Razor\Views\Departments\Index.cshtml.g.cs

@@ -19,7 +19,7 @@ using LavaRapidoSapoBoi;
 #line default
 #line hidden
 #line 2 "F:\Impacta\Udemy\C#\LavaRapidoSapoBoi\LavaRapidoSapoBoi\Views\_ViewImports.cshtml"
-using LavaRapidoSapoBoi.Models;
+using LavaRapidoSapoBoi.Models.ViewModels;
 
 #line default
 #line hidden

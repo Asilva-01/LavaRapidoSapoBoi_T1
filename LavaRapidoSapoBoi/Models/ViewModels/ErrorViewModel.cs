@@ -1,6 +1,6 @@
 using System;
 
-namespace LavaRapidoSapoBoi.Models
+namespace LavaRapidoSapoBoi.Models.ViewModels
 {
     public class ErrorViewModel
     {

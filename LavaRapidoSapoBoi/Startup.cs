@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using LavaRapidoSapoBoi.Models;
 
 namespace LavaRapidoSapoBoi
 {
@@ -33,6 +35,9 @@ namespace LavaRapidoSapoBoi
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<LavaRapidoSapoBoiContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("LavaRapidoSapoBoiContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

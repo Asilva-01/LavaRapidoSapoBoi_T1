@@ -1,6 +1,7 @@
 ﻿using LavaRapidoSapoBoi.Models;
 using LavaRapidoSapoBoi.Services;
 using Microsoft.AspNetCore.Mvc;
+using LavaRapidoSapoBoi.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace LavaRapidoSapoBoi.Controllers
     {
 
         private readonly VendaService _vendaService;
+        private readonly DepartamentoService _departamentoService;
 
-        public VendasController(VendaService vendaService)
+        public VendasController(VendaService vendaService, DepartamentoService departamentoService)
         {
             _vendaService = vendaService;
+            _departamentoService = departamentoService;
         }
 
         public IActionResult Index()
@@ -27,7 +30,11 @@ namespace LavaRapidoSapoBoi.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var departaments = _departamentoService.FinAll();
+            var viewModel = new VendasFormViewModels { Departaments = departaments };
+            
+            
+            return View(viewModel);
 
         }
         

@@ -10,6 +10,7 @@ namespace LavaRapidoSapoBoi.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public ICollection<Vendas> Vendas { get; set; } = new List<Vendas>();
+     
 
         public Departamento()
         {

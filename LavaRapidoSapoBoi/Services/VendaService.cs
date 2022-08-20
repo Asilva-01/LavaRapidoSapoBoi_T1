@@ -23,9 +23,21 @@ namespace LavaRapidoSapoBoi.Services
 
         public void Insert(Vendas obj)
         {
-            
-
+          
             _context.Add(obj);
+            _context.SaveChanges();
+        }
+
+        public Vendas FindById(int id)
+
+        {
+            return _context.Vendas.FirstOrDefault(obj => obj.Id == id);
+        }
+
+        public void Remove(int id)
+        {
+            var obj = _context.Vendas.Find(id);
+            _context.Vendas.Remove(obj);
             _context.SaveChanges();
         }
     }

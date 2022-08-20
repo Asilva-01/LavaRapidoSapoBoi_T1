@@ -14,7 +14,11 @@ namespace LavaRapidoSapoBoi.Models
 
         public Departamento Departamento { get; set; }
 
+        public int DepartamentoId{ get; set; }
+
         public ICollection<RegistroVendas> Venda { get; set; } = new List<RegistroVendas>();
+
+
 
 
         public Vendas()

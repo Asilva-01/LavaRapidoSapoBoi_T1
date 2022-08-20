@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace LavaRapidoSapoBoi.Services
 {
@@ -31,7 +32,7 @@ namespace LavaRapidoSapoBoi.Services
         public Vendas FindById(int id)
 
         {
-            return _context.Vendas.FirstOrDefault(obj => obj.Id == id);
+            return _context.Vendas.Include(obj => obj.Departamento).FirstOrDefault(obj => obj.Id == id);
         }
 
         public void Remove(int id)

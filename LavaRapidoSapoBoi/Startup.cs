@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using LavaRapidoSapoBoi.Models;
 using LavaRapidoSapoBoi.Data;
+using LavaRapidoSapoBoi.Services;
 
 namespace LavaRapidoSapoBoi
 {
@@ -42,6 +43,7 @@ namespace LavaRapidoSapoBoi
                         builder.MigrationsAssembly("LavaRapidoSapoBoi")));
 
             services.AddScoped<SeedingServices>();
+            services.AddScoped<VendaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

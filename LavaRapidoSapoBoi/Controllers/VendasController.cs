@@ -1,4 +1,5 @@
-﻿using LavaRapidoSapoBoi.Services;
+﻿using LavaRapidoSapoBoi.Models;
+using LavaRapidoSapoBoi.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,22 @@ namespace LavaRapidoSapoBoi.Controllers
 
             var list = _vendaService.FindAll();
             return View(list);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult Create(Vendas vendas)
+        {
+            _vendaService.Insert(vendas);
+            return RedirectToAction(nameof(Index));
+
         }
     }
 }

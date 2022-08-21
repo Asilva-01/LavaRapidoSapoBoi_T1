@@ -18,34 +18,35 @@ namespace LavaRapidoSapoBoi.Services
             _context = context;
         }
 
-        public List<Vendas> FindAll()
+        public async Task<List<Vendas>> FindAllAsync()
         {
-            return _context.Vendas.ToList();
+            return await _context.Vendas.ToListAsync();
         }
 
-        public void Insert(Vendas obj)
+        public async Task InsertAsync(Vendas obj)
         {
 
             _context.Add(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Vendas FindById(int id)
+        public async Task<Vendas> FindByIdAsync(int id)
 
         {
-            return _context.Vendas.Include(obj => obj.Departamento).FirstOrDefault(obj => obj.Id == id);
+            return await _context.Vendas.Include(obj => obj.Departamento).FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _context.Vendas.Find(id);
+            var obj = await  _context.Vendas.FindAsync(id);
             _context.Vendas.Remove(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Vendas obj)
+        public async Task UpdateAsync(Vendas obj)
         {
-            if (!_context.Vendas.Any(x => x.Id == obj.Id))
+            bool hasAny = await _context.Vendas.AnyAsync(x => x.Id == obj.Id);
+            if (!hasAny)
             {
                 throw new NotFoundException("Id not found");
             }
@@ -53,7 +54,7 @@ namespace LavaRapidoSapoBoi.Services
             try
             {
                 _context.Update(obj);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
             }
 

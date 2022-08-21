@@ -23,16 +23,16 @@ namespace LavaRapidoSapoBoi.Controllers
             _departamentoService = departamentoService;
         }
 
-        public IActionResult Index()
+        public async Task <IActionResult> Index()
         {
 
-            var list = _vendaService.FindAll();
+            var list = await _vendaService.FindAllAsync();
             return View(list);
         }
 
-        public IActionResult Create()
+        public async Task <IActionResult> Create()
         {
-            var departaments = _departamentoService.FinAll();
+            var departaments = await _departamentoService.FinAllAsync();
             var viewModel = new VendasFormViewModels { Departaments = departaments };
             
             
@@ -43,29 +43,29 @@ namespace LavaRapidoSapoBoi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult Create(Vendas vendas)
+        public async Task<IActionResult> Create(Vendas vendas)
         {
             if (!ModelState.IsValid)
             {
-                var departaments = _departamentoService.FinAll();
+                var departaments = await _departamentoService.FinAllAsync();
                 var viewModel = new VendasFormViewModels { Vendas = vendas, Departaments = departaments };
                 return View(viewModel);
             }
 
 
-            _vendaService.Insert(vendas);
+            await _vendaService.InsertAsync(vendas);
             return RedirectToAction(nameof(Index));
 
         }
 
-        public IActionResult Delete(int? id)
+        public async Task <IActionResult> Delete(int? id)
         {
             if(id == null )
             {
                 return RedirectToAction(nameof(Error), new { message = "Número de cadastro não informado" });
             }
 
-            var obj = _vendaService.FindById(id.Value);
+            var obj = await _vendaService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Cadastro não existente" });
@@ -76,20 +76,20 @@ namespace LavaRapidoSapoBoi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _vendaService.Remove(id);
+           await _vendaService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Número de cadastro não informado" });
             }
 
-            var obj = _vendaService.FindById(id.Value);
+            var obj = await _vendaService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Cadastro não existente" });
@@ -98,31 +98,31 @@ namespace LavaRapidoSapoBoi.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Número de cadastro não informado" });
             }
 
-            var obj = _vendaService.FindById(id.Value);
+            var obj = await _vendaService.FindByIdAsync(id.Value);
             if(obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Cadastro não existente" });
             }
 
-            List<Departamento> departamentos = _departamentoService.FinAll();
+            List<Departamento> departamentos = await _departamentoService.FinAllAsync();
             VendasFormViewModels viewModel = new VendasFormViewModels { Vendas = obj, Departaments = departamentos };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Vendas vendas)
+        public async Task<IActionResult> Edit(int id, Vendas vendas)
         {
             if (!ModelState.IsValid)
             {
-                var departaments = _departamentoService.FinAll();
+                var departaments = await _departamentoService.FinAllAsync();
                 var viewModel = new VendasFormViewModels { Vendas = vendas, Departaments = departaments};
                 return View(viewModel);
             }
@@ -135,7 +135,7 @@ namespace LavaRapidoSapoBoi.Controllers
 
             try
             { 
-            _vendaService.Update(vendas);
+            await _vendaService.UpdateAsync(vendas);
             return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

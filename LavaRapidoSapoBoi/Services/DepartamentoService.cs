@@ -1,7 +1,8 @@
 ﻿using LavaRapidoSapoBoi.Models;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace LavaRapidoSapoBoi.Services
 {
@@ -15,9 +16,9 @@ namespace LavaRapidoSapoBoi.Services
                 _context = context;
             }
 
-            public List<Departamento> FinAll()
+            public async Task<List<Departamento>> FinAllAsync()
         {
-            return _context.Departamento.OrderBy(x => x.Name).ToList();
+            return await _context.Departamento.OrderBy(x => x.Name).ToListAsync();
         }
         }
 }

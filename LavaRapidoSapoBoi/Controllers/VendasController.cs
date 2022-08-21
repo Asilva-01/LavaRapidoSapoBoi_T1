@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LavaRapidoSapoBoi.Services.Exceptions;
 
 namespace LavaRapidoSapoBoi.Controllers
 {
@@ -86,6 +87,48 @@ namespace LavaRapidoSapoBoi.Controllers
             }
 
             return View(obj);
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _vendaService.FindById(id.Value);
+            if(obj == null)
+            {
+                return NotFound();
+            }
+
+            List<Departamento> departamentos = _departamentoService.FinAll();
+            VendasFormViewModels viewModel = new VendasFormViewModels { Vendas = obj, Departaments = departamentos };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Vendas vendas)
+        {
+            if (id != vendas.Id)
+            {
+                return BadRequest();
+            }
+
+            try
+            { 
+            _vendaService.Update(vendas);
+            return RedirectToAction(nameof(Index));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
     }
 }

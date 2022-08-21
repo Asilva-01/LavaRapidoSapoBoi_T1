@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using LavaRapidoSapoBoi.Services.Exceptions;
 
 namespace LavaRapidoSapoBoi.Services
 {
@@ -24,7 +25,7 @@ namespace LavaRapidoSapoBoi.Services
 
         public void Insert(Vendas obj)
         {
-          
+
             _context.Add(obj);
             _context.SaveChanges();
         }
@@ -40,6 +41,27 @@ namespace LavaRapidoSapoBoi.Services
             var obj = _context.Vendas.Find(id);
             _context.Vendas.Remove(obj);
             _context.SaveChanges();
+        }
+
+        public void Update(Vendas obj)
+        {
+            if (!_context.Vendas.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id not found");
+            }
+
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+
+            }
+
+            catch(DbConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+
+            }
         }
     }
 }

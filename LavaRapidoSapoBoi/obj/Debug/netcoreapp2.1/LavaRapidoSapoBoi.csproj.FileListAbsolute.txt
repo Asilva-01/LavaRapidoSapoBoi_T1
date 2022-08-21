@@ -43,3 +43,4 @@ F:\Impacta\Udemy\C#\LavaRapidoSapoBoi\LavaRapidoSapoBoi\obj\Debug\netcoreapp2.1\
 F:\Impacta\Udemy\C#\LavaRapidoSapoBoi\LavaRapidoSapoBoi\obj\Debug\netcoreapp2.1\Razor\Views\Vendas\Create.cshtml.g.cs
 F:\Impacta\Udemy\C#\LavaRapidoSapoBoi\LavaRapidoSapoBoi\obj\Debug\netcoreapp2.1\Razor\Views\Vendas\Delete.cshtml.g.cs
 F:\Impacta\Udemy\C#\LavaRapidoSapoBoi\LavaRapidoSapoBoi\obj\Debug\netcoreapp2.1\Razor\Views\Vendas\Details.cshtml.g.cs
+F:\Impacta\Udemy\C#\LavaRapidoSapoBoi\LavaRapidoSapoBoi\obj\Debug\netcoreapp2.1\Razor\Views\Vendas\Edit.cshtml.g.cs

@@ -1,0 +1,43 @@
+﻿@model LavaRapidoSapoBoi.Models.ViewModels.VendasFormViewModels
+
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Vendas</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Vendas.Id" />
+            <div class="form-group">
+                <label asp-for="Vendas.Nome" class="control-label"></label>
+                <input asp-for="Vendas.Nome" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Vendas.Email" class="control-label"></label>
+                <input asp-for="Vendas.Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Vendas.DataNascimento" class="control-label"></label>
+                <input asp-for="Vendas.DataNascimento" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Vendas.SalarioBase" class="control-label"></label>
+                <input asp-for="Vendas.SalarioBase" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Vendas.DepartamentoId" class="control-label"></label>
+                <select asp-for="Vendas.DepartamentoId" asp-items="@(new SelectList(Model.Departaments,"Id",
+                    "Name"))" class="form-control"></select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Gravar" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>

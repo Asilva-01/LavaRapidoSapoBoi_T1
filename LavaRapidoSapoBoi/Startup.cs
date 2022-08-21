@@ -47,6 +47,7 @@ namespace LavaRapidoSapoBoi
             services.AddScoped<SeedingServices>();
             services.AddScoped<VendaService>();
             services.AddScoped<DepartamentoService>();
+            services.AddScoped<VendasRecordsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

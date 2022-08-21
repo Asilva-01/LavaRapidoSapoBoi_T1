@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LavaRapidoSapoBoi.Services.Exceptions;
+using System.Diagnostics;
 
 namespace LavaRapidoSapoBoi.Controllers
 {
@@ -53,13 +54,13 @@ namespace LavaRapidoSapoBoi.Controllers
         {
             if(id == null )
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Número de cadastro não informado" });
             }
 
             var obj = _vendaService.FindById(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Cadastro não existente" });
             }
 
             return View(obj);
@@ -77,13 +78,13 @@ namespace LavaRapidoSapoBoi.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Número de cadastro não informado" });
             }
 
             var obj = _vendaService.FindById(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Cadastro não existente" });
             }
 
             return View(obj);
@@ -93,13 +94,13 @@ namespace LavaRapidoSapoBoi.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Número de cadastro não informado" });
             }
 
             var obj = _vendaService.FindById(id.Value);
             if(obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Cadastro não existente" });
             }
 
             List<Departamento> departamentos = _departamentoService.FinAll();
@@ -113,7 +114,7 @@ namespace LavaRapidoSapoBoi.Controllers
         {
             if (id != vendas.Id)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = "Número de cadastro incorreto!" });
             }
 
             try
@@ -121,14 +122,22 @@ namespace LavaRapidoSapoBoi.Controllers
             _vendaService.Update(vendas);
             return RedirectToAction(nameof(Index));
             }
-            catch (NotFoundException)
+            catch (ApplicationException e)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-            catch (DbConcurrencyException)
-            {
-                return BadRequest();
-            }
+
         }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
+        }
+
     }
 }

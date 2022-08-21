@@ -37,12 +37,20 @@ namespace LavaRapidoSapoBoi.Services
         }
 
         public async Task RemoveAsync(int id)
-        {
-            var obj = await  _context.Vendas.FindAsync(id);
-            _context.Vendas.Remove(obj);
-            await _context.SaveChangesAsync();
-        }
 
+
+        {
+            try
+            {
+                var obj = await _context.Vendas.FindAsync(id);
+                _context.Vendas.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                throw new IntegrityException("Já existe vendas associada ao cadastro, não será possível excluir o registro");
+            }
+        }
         public async Task UpdateAsync(Vendas obj)
         {
             bool hasAny = await _context.Vendas.AnyAsync(x => x.Id == obj.Id);

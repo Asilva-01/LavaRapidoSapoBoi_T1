@@ -45,6 +45,14 @@ namespace LavaRapidoSapoBoi.Controllers
 
         public IActionResult Create(Vendas vendas)
         {
+            if (!ModelState.IsValid)
+            {
+                var departaments = _departamentoService.FinAll();
+                var viewModel = new VendasFormViewModels { Vendas = vendas, Departaments = departaments };
+                return View(viewModel);
+            }
+
+
             _vendaService.Insert(vendas);
             return RedirectToAction(nameof(Index));
 
@@ -112,6 +120,14 @@ namespace LavaRapidoSapoBoi.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Vendas vendas)
         {
+            if (!ModelState.IsValid)
+            {
+                var departaments = _departamentoService.FinAll();
+                var viewModel = new VendasFormViewModels { Vendas = vendas, Departaments = departaments};
+                return View(viewModel);
+            }
+
+
             if (id != vendas.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Número de cadastro incorreto!" });

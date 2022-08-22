@@ -39,11 +39,29 @@ namespace LavaRapidoSapoBoi.Services
 
         }
 
-        public static implicit operator VendasRecordsService(VendasRecordsController v)
+
+        public async Task<List<IGrouping<Departamento, RegistroVendas>>> FindByDateGroupingAsync(DateTime? minDate, DateTime? maxDate)
         {
-            throw new NotImplementedException();
+            var result = from obj in _context.RegistroVendas select obj;
+            if (minDate.HasValue)
+            {
+                result = result.Where(x => x.Data >= minDate.Value);
+            }
+            if (maxDate.HasValue)
+            {
+                result = result.Where(x => x.Data <= maxDate.Value);
+            }
+
+            return await result
+                .Include(x => x.Vendas)
+                .Include(x => x.Vendas.Departamento)
+                .OrderByDescending(x => x.Data)
+                .GroupBy(x => x.Vendas.Departamento)
+                .ToListAsync();
+
         }
-    }
-    }
 
 
+    }
+
+}
